@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+//#include<sys/types.h>
+//#include<sys/wait.h>
+int main()
+{
+	int pid;
+	char *args[]={"/bin/ls","-l",0};
+	printf("\n parent process");
+	pid=fork();
+	if(pid==0)
+	{
+		execv("/bin/ls",args);
+		printf("\nChild process");
+	}
+	else
+	{
+		wait(&pid);
+		printf("\nParent process");
+		exit(0);
+	}
+}
